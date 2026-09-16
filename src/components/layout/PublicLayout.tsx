@@ -35,13 +35,13 @@ export default function PublicLayout() {
       {/* Main Header */}
       <header className="bg-white border-b sticky top-0 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-              <Link to="/" className="flex items-center gap-3">
+              <Link to="/" className="flex items-center gap-2 min-w-0">
                 <img 
                   src="/images/networth-certificate-visa-logo.png" 
                   alt="Networth Certificate Visa" 
-                  className="h-12 md:h-14 w-auto object-contain" 
+                  className="h-10 sm:h-11 md:h-14 w-auto object-contain flex-shrink-0" 
                 />
-                <span className="font-bold text-[#0B1830] text-lg md:text-xl whitespace-nowrap">
+                <span className="font-bold text-[#0B1830] text-sm sm:text-lg md:text-xl leading-tight whitespace-normal md:whitespace-nowrap">
                   {settings?.businessName || 'Networth Certificate Visa'}
                 </span>
               </Link>
