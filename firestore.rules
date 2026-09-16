@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null && (
+        request.auth.token.email == 'sagarkiisha9@gmail.com' ||
+        exists(/databases/$(database)/documents/adminUsers/$(request.auth.uid))
+      );
+    }
+
+    match /leads/{leadId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /adminUsers/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow read, write: if isAdmin();
+    }
+
+    match /siteSettings/{docId} { allow read: if true; allow write: if isAdmin(); }
+    match /homepage/{docId} { allow read: if true; allow write: if isAdmin(); }
+    match /services/{docId} { allow read: if true; allow write: if isAdmin(); }
+    match /countries/{docId} { allow read: if true; allow write: if isAdmin(); }
+    match /visaTypes/{docId} { allow read: if true; allow write: if isAdmin(); }
+    match /documentCategories/{docId} { allow read: if true; allow write: if isAdmin(); }
+    match /faqs/{docId} { allow read: if true; allow write: if isAdmin(); }
+    match /testimonials/{docId} { allow read: if true; allow write: if isAdmin(); }
+    match /blogPosts/{docId} { allow read: if true; allow write: if isAdmin(); }
+    match /seoSettings/{docId} { allow read: if true; allow write: if isAdmin(); }
+    match /contactSettings/{docId} { allow read: if true; allow write: if isAdmin(); }
+    match /caProfile/{docId} { allow read: if true; allow write: if isAdmin(); }
+    match /media/{docId} { allow read: if true; allow write: if isAdmin(); }
+
+    match /{document=**} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

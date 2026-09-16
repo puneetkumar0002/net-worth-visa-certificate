@@ -1,0 +1,6 @@
+{
+  "name": "Networth Certificate Visa",
+  "description": "CA-Certified Net Worth Certificate for Visa applications.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
