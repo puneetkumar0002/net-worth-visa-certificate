@@ -56,7 +56,7 @@ export default function PublicLayout() {
             <Link to="/contact" className="hover:text-[#0C6D62] transition-colors">Contact</Link>
             <PremiumCTAButton 
               text="Get Net Worth Certificate" 
-              onClick={() => navigate('/contact')}
+              onClick={() => !loading && openWhatsApp(settings.whatsapp, "Hello, I am interested in getting a Net Worth Certificate for my visa application.\n\nPlease guide me with the process and required documents.")}
               className="px-6 h-10 text-sm"
             />
           </nav>
@@ -79,7 +79,12 @@ export default function PublicLayout() {
           <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="p-2 border-b">Contact</Link>
           <PremiumCTAButton 
             text="Get Net Worth Certificate" 
-            onClick={() => { navigate('/contact'); setMobileMenuOpen(false); }}
+            onClick={() => { 
+              if (!loading) {
+                openWhatsApp(settings.whatsapp, "Hello, I am interested in getting a Net Worth Certificate for my visa application.\n\nPlease guide me with the process and required documents.");
+                setMobileMenuOpen(false);
+              }
+            }}
             className="w-full"
           />
         </div>
@@ -160,7 +165,7 @@ export default function PublicLayout() {
         <div className="flex-[2] ml-2">
           <PremiumCTAButton 
             text="Get Certificate" 
-            onClick={() => navigate('/contact')}
+            onClick={() => !loading && openWhatsApp(settings.whatsapp, "Hello, I am interested in getting a Net Worth Certificate for my visa application.\n\nPlease guide me with the process and required documents.")}
             className="w-full h-9 text-xs"
             fullWidthMobile={true}
           />

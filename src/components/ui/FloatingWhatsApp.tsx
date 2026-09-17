@@ -15,7 +15,7 @@ export default function FloatingWhatsApp() {
     <motion.button
       onClick={handleClick}
       disabled={loading}
-      className="fixed bottom-20 md:bottom-8 right-4 md:right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-[0_4px_14px_0_rgba(37,211,102,0.39)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.23)] flex items-center justify-center cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+      className="fixed hidden md:flex bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-[0_4px_14px_0_rgba(37,211,102,0.39)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.23)] items-center justify-center cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       whileHover={!loading ? { scale: 1.1 } : {}}

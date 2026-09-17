@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Mail, MapPin, Phone, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MessageSquare } from 'lucide-react';
 import { Card, CardContent } from '../../components/ui/card';
 import { Input } from '../../components/ui/input';
 import { Textarea } from '../../components/ui/textarea';
@@ -161,30 +161,6 @@ Please share the required document checklist and next steps.`;
                   <a href={`mailto:${settings.email}`} className="text-slate-600 text-sm hover:text-[#0C6D62] hover:underline">
                     {settings.email}
                   </a>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-none shadow-md">
-              <CardContent className="p-6 flex items-start space-x-4">
-                <div className="w-10 h-10 bg-[#0C6D62]/10 rounded-full flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-5 h-5 text-[#0C6D62]" />
-                </div>
-                <div 
-                  className={settings.googleMapsUrl ? "cursor-pointer group" : ""}
-                  onClick={() => {
-                    if (settings.googleMapsUrl) {
-                      window.open(settings.googleMapsUrl, '_blank', 'noopener,noreferrer');
-                    }
-                  }}
-                >
-                  <h3 className="font-semibold text-[#0B1830] mb-1 group-hover:text-[#0C6D62]">Office Location</h3>
-                  <p className="text-slate-600 text-sm">
-                    {[settings.address, settings.city, settings.state, settings.pincode, settings.country].filter(Boolean).join(", ")}
-                  </p>
-                  {settings.officeVisitNote && (
-                    <p className="text-slate-500 text-xs mt-1">({settings.officeVisitNote})</p>
-                  )}
                 </div>
               </CardContent>
             </Card>
