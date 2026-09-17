@@ -19,8 +19,8 @@ const AuthContext = createContext<AuthContextType>({
   signOut: async () => {},
 });
 
-// The designated super admin email
-const SUPER_ADMIN_EMAIL = 'sagarkiisha9@gmail.com';
+// The designated super admin emails
+const SUPER_ADMIN_EMAILS = ['sagarkiisha9@gmail.com', 'admin@visafinance.com'];
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
               setIsAdmin(false);
               setAdminData(null);
             }
-          } else if (currentUser.email === SUPER_ADMIN_EMAIL) {
+          } else if (currentUser.email && SUPER_ADMIN_EMAILS.includes(currentUser.email)) {
             // Auto-provision the super admin on first login
             const superAdminData = {
               name: 'Super Admin',
@@ -64,8 +64,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           }
         } catch (error) {
           console.error('Error checking admin status', error);
-          // If we hit a permission error but they are the super admin, let them in anyway
-          if (currentUser.email === SUPER_ADMIN_EMAIL) {
+          // If we hit a permission error but they are a super admin, let them in anyway
+          if (currentUser.email && SUPER_ADMIN_EMAILS.includes(currentUser.email)) {
             setIsAdmin(true);
             setAdminData({ role: 'super_admin', email: currentUser.email, name: 'Super Admin' });
           } else {
