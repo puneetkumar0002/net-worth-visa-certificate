@@ -9,8 +9,9 @@ import { Button } from '../../components/ui/button';
 import { 
   CheckCircle, ArrowRight, FileText, Globe, MapPin, 
   ShieldCheck, MessageSquare, PhoneCall, Clock, Info,
-  Navigation
+  Navigation, ChevronRight
 } from 'lucide-react';
+import { WhatsAppButton } from '../../components/ui/WhatsAppButton';
 import SEO from '../../components/SEO';
 import { useSiteSettings } from '../../contexts/SiteSettingsContext';
 import { openWhatsApp } from '../../lib/whatsapp';
@@ -188,23 +189,20 @@ export default function CityLandingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+              className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-center"
             >
-              <Link to="/contact">
-                <Button size="lg" className="bg-[#0C6D62] hover:bg-[#0C6D62]/90 text-white font-bold h-14 px-10 rounded-full w-full">
+              <Link to="/contact" className="w-full sm:w-auto">
+                <Button size="lg" className="bg-[#0C6D62] hover:bg-[#0C6D62]/90 text-white font-bold h-14 md:h-[58px] px-10 rounded-full w-full">
                   Get Net Worth Certificate
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </Link>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                onClick={handleWhatsApp}
-                className="border-slate-200 text-slate-700 font-bold h-14 px-10 rounded-full w-full hover:bg-slate-50"
-              >
-                <MessageSquare className="w-5 h-5 mr-2 text-green-500" />
-                WhatsApp Now
-              </Button>
+              <WhatsAppButton 
+                text="WhatsApp Now"
+                message={`Hello, I'm looking for a Net Worth Certificate in ${location.city}.`}
+                fullWidth={true}
+                className="sm:w-auto"
+              />
             </motion.div>
           </div>
         </div>
@@ -336,14 +334,22 @@ export default function CityLandingPage() {
                     <p className="text-slate-300 mb-8 leading-relaxed">
                       Start your application today. Our team provides remote support and fast CA-certified document processing.
                     </p>
-                    <Button 
-                      size="lg" 
-                      onClick={handleWhatsApp}
-                      className="w-full bg-[#D6A84B] text-[#0B1830] hover:bg-[#D6A84B]/90 font-bold h-14 rounded-full"
-                    >
-                      <MessageSquare className="w-5 h-5 mr-2" />
-                      WhatsApp for Assistance
-                    </Button>
+                    <div className="space-y-4">
+                      <WhatsAppButton 
+                        text="WhatsApp for Assistance"
+                        message={`Hello, I need assistance with a Net Worth Certificate in ${location.city}.`}
+                        fullWidth={true}
+                      />
+                      <Link to="/contact" className="block">
+                        <Button 
+                          variant="outline"
+                          size="lg" 
+                          className="w-full border-[#D6A84B] text-[#0B1830] hover:bg-[#D6A84B]/5 font-bold h-14 md:h-[58px] rounded-full"
+                        >
+                          Send Online Inquiry
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
                   <div className="bg-[#081224] p-6 text-center">
                     <p className="text-xs text-slate-400">100% Online & Remote Processing</p>
@@ -443,21 +449,4 @@ export default function CityLandingPage() {
   );
 }
 
-function ChevronRight(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m9 18 6-6-6-6" />
-    </svg>
-  );
-}
+

@@ -5,6 +5,7 @@ import { Button } from '../../components/ui/button';
 import { CheckCircle2, FileCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useSiteSettings } from '../../contexts/SiteSettingsContext';
+import { WhatsAppButton } from '../../components/ui/WhatsAppButton';
 import { openWhatsApp } from '../../lib/whatsapp';
 
 import SEO from '../../components/SEO';
@@ -132,14 +133,22 @@ Visa Type:`;
           <h2 className="text-3xl font-bold mb-4">Ready to Begin?</h2>
           <p className="text-slate-300 max-w-2xl mx-auto mb-8 text-lg">You can start your application online right away, or reach out to us if you need help with the document requirements.</p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <Link to="/contact">
-              <Button size="lg" className="bg-[#D6A84B] text-[#0B1830] hover:bg-[#D6A84B]/90 font-bold rounded-full px-8 h-14 text-lg w-full sm:w-auto">
+            <Link to="/contact" className="w-full sm:w-auto">
+              <Button size="lg" className="bg-[#D6A84B] text-[#0B1830] hover:bg-[#D6A84B]/90 font-bold rounded-full px-8 h-14 text-lg w-full">
                 Start Application
               </Button>
             </Link>
-            <Button size="lg" variant="outline" onClick={handleWhatsAppClick} className="rounded-full px-8 h-14 text-lg border-white text-[#0B1830] bg-white hover:bg-slate-100 hover:text-[#0B1830] w-full sm:w-auto">
-              WhatsApp for Help
-            </Button>
+            <WhatsAppButton 
+              text="WhatsApp for Help"
+              message={`Hello, I need a Net Worth Certificate for my visa application.
+
+Please guide me regarding the required documents and process.
+
+Name:
+Country Applying For:
+Visa Type:`}
+              className="w-full sm:w-auto"
+            />
           </div>
         </motion.div>
       </div>

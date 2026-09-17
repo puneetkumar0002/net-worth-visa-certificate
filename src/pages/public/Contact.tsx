@@ -9,6 +9,7 @@ import { db } from '../../lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import toast from 'react-hot-toast';
 import { useSiteSettings } from '../../contexts/SiteSettingsContext';
+import { WhatsAppButton } from '../../components/ui/WhatsAppButton';
 import { openWhatsApp } from '../../lib/whatsapp';
 
 import SEO from '../../components/SEO';
@@ -165,16 +166,13 @@ Please share the required document checklist and next steps.`;
                 </div>
                 <div>
                   <h3 className="font-semibold text-[#0B1830] mb-1">Phone / WhatsApp</h3>
-                  <p className="text-slate-600 text-sm mb-2">{settingsLoading ? 'Loading...' : settings.phone}</p>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    onClick={() => !settingsLoading && openWhatsApp(settings.whatsapp, "Hello, I would like to get in touch with you.")}
-                    disabled={settingsLoading}
-                    className="w-full font-semibold border-[#0C6D62] text-[#0C6D62] hover:bg-[#0C6D62] hover:text-white disabled:opacity-50"
-                  >
-                    <MessageSquare className="w-4 h-4 mr-2" /> Message on WhatsApp
-                  </Button>
+                  <p className="text-slate-600 text-sm mb-4">{settingsLoading ? 'Loading...' : settings.phone}</p>
+                  <WhatsAppButton 
+                    text="Message on WhatsApp"
+                    message="Hello, I would like to get in touch with you."
+                    fullWidth={true}
+                    className="h-12 md:h-12 text-sm"
+                  />
                 </div>
               </CardContent>
             </Card>

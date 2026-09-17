@@ -12,6 +12,7 @@ import { db } from '../../lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { openWhatsApp } from '../../lib/whatsapp';
 import { handleCTAAction } from '../../lib/cta';
+import { WhatsAppButton } from '../../components/ui/WhatsAppButton';
 
 import SEO from '../../components/SEO';
 
@@ -130,14 +131,11 @@ export default function Home() {
                     />
                 )}
                 {cta.secondary.enabled && (
-                    <Button 
-                    size="lg" 
-                    variant="outline" 
-                    onClick={handleSecondaryClick}
-                    className="rounded-full font-semibold border-slate-300 text-[#0B1830] transition-transform hover:-translate-y-1 active:scale-95"
-                    >
-                    {cta.secondary.text}
-                    </Button>
+                    <WhatsAppButton 
+                      text={cta.secondary.text}
+                      message={cta.secondary.message || "Hello, I am interested in getting a Net Worth Certificate for my visa application. Please guide me with the process."}
+                      className="w-full sm:w-auto"
+                    />
                 )}
               </motion.div>
 
@@ -398,9 +396,11 @@ export default function Home() {
             />
           )}
           {cta.secondary.enabled && (
-            <Button size="lg" variant="outline" onClick={handleSecondaryClick} className="rounded-full px-8 h-14 text-lg font-semibold border-white text-[#0B1830] hover:bg-white/10 bg-white">
-              {cta.secondary.text}
-            </Button>
+            <WhatsAppButton 
+              text={cta.secondary.text}
+              message={cta.secondary.message || "Hello, I am interested in getting a Net Worth Certificate for my visa application. Please guide me with the process."}
+              className="w-full sm:w-auto"
+            />
           )}
           </div>
         </motion.div>
