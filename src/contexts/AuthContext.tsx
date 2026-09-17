@@ -39,21 +39,26 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           
           if (adminDoc.exists()) {
             const data = adminDoc.data();
-            if (data.status === 'active') {
+            // Check if user is active AND has an admin role
+            const hasAdminRole = ['super_admin', 'admin', 'editor'].includes(data.role);
+            if (data.status === 'active' && hasAdminRole) {
               setIsAdmin(true);
               setAdminData(data);
             } else {
               setIsAdmin(false);
               setAdminData(null);
+              console.warn(`User ${currentUser.email} authenticated but role "${data.role}" or status "${data.status}" is invalid.`);
             }
           } else if (currentUser.email && SUPER_ADMIN_EMAILS.includes(currentUser.email)) {
             // Auto-provision the super admin on first login
+            console.log(`First-time setup: Provisioning super admin for ${currentUser.email}`);
             const superAdminData = {
               name: 'Super Admin',
               email: currentUser.email,
               role: 'super_admin',
               status: 'active',
-              createdAt: serverTimestamp()
+              createdAt: serverTimestamp(),
+              lastLogin: serverTimestamp()
             };
             await setDoc(adminRef, superAdminData);
             setIsAdmin(true);
@@ -61,6 +66,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           } else {
             setIsAdmin(false);
             setAdminData(null);
+            console.warn(`Access denied for ${currentUser.email}: Not an authorized admin.`);
           }
         } catch (error) {
           console.error('Error checking admin status', error);

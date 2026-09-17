@@ -15,9 +15,46 @@ export default function AdminLogin() {
   const [isResetting, setIsResetting] = useState(false);
   
   const navigate = useNavigate();
-  const { user, isAdmin, loading: authLoading } = useAuth();
+  const { user, isAdmin, loading: authLoading, signOut } = useAuth();
+
+  // Handle Firebase Auth errors with user-friendly messages
+  const getAuthErrorMessage = (code: string) => {
+    console.error("Firebase Auth Error:", code);
+    switch (code) {
+      case 'auth/invalid-credential':
+        return 'Invalid email or password. Please check your credentials.';
+      case 'auth/user-not-found':
+        return 'No admin account found with this email.';
+      case 'auth/wrong-password':
+        return 'Incorrect password. Please try again.';
+      case 'auth/invalid-email':
+        return 'Please enter a valid email address.';
+      case 'auth/too-many-requests':
+        return 'Too many failed login attempts. Please try again later.';
+      case 'auth/popup-closed-by-user':
+        return 'Login popup was closed before completion.';
+      case 'auth/popup-blocked':
+        return 'Login popup was blocked by your browser.';
+      case 'auth/cancelled-popup-request':
+        return 'Login request was cancelled.';
+      case 'auth/unauthorized-domain':
+        return 'This domain is not authorized for authentication. Please check Firebase console.';
+      case 'auth/operation-not-allowed':
+        return 'This authentication method is not enabled in Firebase.';
+      case 'auth/network-request-failed':
+        return 'Network error. Please check your connection.';
+      default:
+        return 'An unexpected error occurred. Please try again.';
+    }
+  };
 
   useEffect(() => {
+    // Domain authorization warning for developers
+    const currentDomain = window.location.hostname;
+    if (currentDomain !== 'localhost' && !currentDomain.includes('run.app')) {
+      console.warn(`Note: Ensure "${currentDomain}" is added to Authorized Domains in Firebase Console > Authentication > Settings.`);
+    }
+
     if (!authLoading && user && isAdmin) {
       navigate('/admin');
     }
@@ -25,14 +62,14 @@ export default function AdminLogin() {
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!email || !password) return;
+    
     setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      toast.success('Signed in successfully');
-      // Navigation is handled by useEffect
+      // Success handled by useEffect
     } catch (error: any) {
-      console.error('Email Auth error', error);
-      toast.error('Invalid email or password.');
+      toast.error(getAuthErrorMessage(error.code));
     } finally {
       setLoading(false);
     }
@@ -42,12 +79,12 @@ export default function AdminLogin() {
     setLoading(true);
     try {
       const provider = new GoogleAuthProvider();
+      // Force account selection
+      provider.setCustomParameters({ prompt: 'select_account' });
       await signInWithPopup(auth, provider);
-      toast.success('Signed in successfully');
-      // Navigation is handled by useEffect
+      // Success handled by useEffect
     } catch (error: any) {
-      console.error('Google Auth error', error);
-      toast.error('Unable to connect. Please try again.');
+      toast.error(getAuthErrorMessage(error.code));
     } finally {
       setLoading(false);
     }
