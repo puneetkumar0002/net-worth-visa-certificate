@@ -20,6 +20,8 @@ import PublicDocuments from './pages/public/Documents';
 import About from './pages/public/About';
 import NetWorthCertificate from './pages/public/NetWorthCertificate';
 import GenericPage from './pages/public/GenericPage';
+import Locations from './pages/public/Locations';
+import CityLandingPage from './pages/public/CityLandingPage';
 
 // Admin Pages
 import AdminLogin from './pages/admin/Login';
@@ -34,6 +36,7 @@ import AdminCustomers from './pages/admin/Customers';
 import AdminPayments from './pages/admin/Payments';
 import Settings from './pages/admin/Settings';
 import Pricing from './pages/admin/Pricing';
+import AdminLocations from './pages/admin/Locations';
 import FAQs from './pages/admin/FAQs';
 import Testimonials from './pages/admin/Testimonials';
 import AdminUsers from './pages/admin/AdminUsers';
@@ -85,6 +88,8 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
+import CountryDetail from './pages/public/CountryDetail';
+
 function AppRoutes() {
   return (
     <Routes>
@@ -96,8 +101,20 @@ function AppRoutes() {
         <Route path="documents" element={<PublicDocuments />} />
         <Route path="about" element={<About />} />
         <Route path="net-worth-certificate" element={<NetWorthCertificate />} />
+        <Route path="locations" element={<Locations />} />
+        <Route path="net-worth-certificate/:city" element={<CityLandingPage />} />
         <Route path="property-valuation" element={<GenericPage title="Property Valuation" description="Professional valuation of residential, commercial, agricultural and ancestral property." />} />
         <Route path="investment-valuation" element={<GenericPage title="Investment Valuation" description="Certification and valuation of mutual funds, shares, demat holdings, PPF, bonds and other investments." />} />
+        
+        {/* Country Specific SEO Pages */}
+        <Route path="canada-net-worth-certificate" element={<CountryDetail />} />
+        <Route path="australia-net-worth-certificate" element={<CountryDetail />} />
+        <Route path="uk-net-worth-certificate" element={<CountryDetail />} />
+        <Route path="usa-net-worth-certificate" element={<CountryDetail />} />
+        <Route path="new-zealand-net-worth-certificate" element={<CountryDetail />} />
+        <Route path="schengen-net-worth-certificate" element={<CountryDetail />} />
+        <Route path=":slug-net-worth-certificate" element={<CountryDetail />} />
+
         <Route path="privacy-policy" element={<GenericPage title="Privacy Policy" description="Your privacy is critically important to us. This privacy policy explains how we collect, use, and protect your personal information." />} />
         <Route path="terms" element={<GenericPage title="Terms & Conditions" description="These terms and conditions outline the rules and regulations for the use of our services and website." />} />
         <Route path="*" element={<NotFound />} />
@@ -128,6 +145,7 @@ function AppRoutes() {
         <Route path="content" element={<WebsiteContent />} />
         <Route path="services" element={<AdminServices />} />
         <Route path="countries" element={<AdminCountries />} />
+        <Route path="locations" element={<AdminLocations />} />
         <Route path="pricing" element={<Pricing />} />
         <Route path="faqs" element={<FAQs />} />
         <Route path="testimonials" element={<Testimonials />} />
@@ -145,15 +163,19 @@ function AppRoutes() {
   );
 }
 
+import { HelmetProvider } from 'react-helmet-async';
+
 export default function App() {
   return (
-    <SiteSettingsProvider>
-      <AuthProvider>
-        <BrowserRouter>
-          <AppRoutes />
-          <Toaster position="top-right" />
-        </BrowserRouter>
-      </AuthProvider>
-    </SiteSettingsProvider>
+    <HelmetProvider>
+      <SiteSettingsProvider>
+        <AuthProvider>
+          <BrowserRouter>
+            <AppRoutes />
+            <Toaster position="top-right" />
+          </BrowserRouter>
+        </AuthProvider>
+      </SiteSettingsProvider>
+    </HelmetProvider>
   );
 }

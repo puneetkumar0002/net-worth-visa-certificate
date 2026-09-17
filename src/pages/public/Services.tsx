@@ -7,9 +7,30 @@ import { Link } from 'react-router-dom';
 import { db } from '../../lib/firebase';
 import { collection, query, orderBy, where, getDocs } from 'firebase/firestore';
 
+import SEO from '../../components/SEO';
+
 export default function Services() {
   const [dynamicServices, setDynamicServices] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://networthvisa.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Services",
+        "item": "https://networthvisa.com/services"
+      }
+    ]
+  };
 
   const defaultServices = [
     {
@@ -110,6 +131,12 @@ export default function Services() {
 
   return (
     <div className="bg-[#F5F8FB] min-h-screen py-12">
+      <SEO 
+        title="Visa Financial Services | Net Worth Certificate & Property Valuation"
+        description="Explore our range of professional financial documentation services including Net Worth Certificates, Property Valuation, and Investment Certification for visa applications."
+        canonical="/services"
+        schema={breadcrumbSchema}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           className="text-center max-w-3xl mx-auto mb-16"

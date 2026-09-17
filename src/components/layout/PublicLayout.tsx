@@ -126,6 +126,7 @@ export default function PublicLayout() {
             <h3 className="font-semibold text-lg mb-4 text-[#D6A84B]">Quick Links</h3>
             <ul className="space-y-3 text-sm text-slate-300">
               <li><Link to="/visa-countries" className="hover:text-white transition-colors">Visa Countries</Link></li>
+              <li><Link to="/locations" className="hover:text-white transition-colors">Our Locations</Link></li>
               <li><Link to="/documents" className="hover:text-white transition-colors">Document Checklist</Link></li>
               <li><Link to="/about" className="hover:text-white transition-colors">About Firm</Link></li>
               <li><Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>

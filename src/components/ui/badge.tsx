@@ -6,7 +6,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
+  children?: React.ReactNode;
+}
 
 function Badge({ className, ...props }: BadgeProps) {
   return (

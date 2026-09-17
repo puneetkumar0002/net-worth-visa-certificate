@@ -7,8 +7,29 @@ import { Link } from 'react-router-dom';
 import { useSiteSettings } from '../../contexts/SiteSettingsContext';
 import { openWhatsApp } from '../../lib/whatsapp';
 
+import SEO from '../../components/SEO';
+
 export default function Documents() {
   const { settings, loading } = useSiteSettings();
+  
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://networthvisa.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Documents Required",
+        "item": "https://networthvisa.com/documents"
+      }
+    ]
+  };
   
   const handleWhatsAppClick = () => {
     const fallbackNumber = '+919876543210';
@@ -55,6 +76,12 @@ Visa Type:`;
 
   return (
     <div className="bg-[#F5F8FB] min-h-screen py-12">
+      <SEO 
+        title="Documents Required for Net Worth Certificate for Visa"
+        description="Comprehensive checklist of personal, bank, property, and investment documents required for preparing your CA-certified Net Worth Certificate for visa applications."
+        canonical="/documents"
+        schema={breadcrumbSchema}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           className="text-center max-w-3xl mx-auto mb-16"

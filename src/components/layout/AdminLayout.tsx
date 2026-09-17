@@ -9,6 +9,8 @@ import {
 import { Button } from '../ui/button';
 import clsx from 'clsx';
 
+import SEO from '../SEO';
+
 export default function AdminLayout() {
   const { signOut, user, adminData } = useAuth();
   const navigate = useNavigate();
@@ -39,6 +41,7 @@ export default function AdminLayout() {
     { name: 'Services', path: '/admin/services' },
     { name: 'Countries', path: '/admin/countries' },
     { name: 'Pricing', path: '/admin/pricing' },
+    { name: 'Locations', path: '/admin/locations' },
     { name: 'FAQs', path: '/admin/faqs' },
     { name: 'Testimonials', path: '/admin/testimonials' },
     { name: 'Blog', path: '/admin/blog' },
@@ -53,6 +56,7 @@ export default function AdminLayout() {
 
   return (
     <div className="min-h-screen flex bg-[#F5F8FB] text-slate-900 font-sans">
+      <SEO noindex={true} />
       {/* Sidebar */}
       <aside className="w-64 bg-[#0B1830] text-slate-300 flex flex-col fixed inset-y-0 z-20 shadow-xl overflow-y-auto">
         <div className="h-16 flex items-center px-4 bg-[#081224] text-white font-bold text-sm border-b border-white/10 sticky top-0 z-10 shrink-0">

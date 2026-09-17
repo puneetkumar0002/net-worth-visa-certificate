@@ -7,6 +7,7 @@ import { Input } from '../../components/ui/input';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../../components/ui/card';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../contexts/AuthContext';
+import SEO from '../../components/SEO';
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('');
@@ -109,6 +110,7 @@ export default function AdminLogin() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-100 p-4">
+      <SEO noindex={true} />
       <Card className="w-full max-w-md shadow-2xl border-0 overflow-hidden">
         <div className="bg-[#0B1830] h-2 w-full"></div>
         <CardHeader className="text-center pb-6 pt-8">

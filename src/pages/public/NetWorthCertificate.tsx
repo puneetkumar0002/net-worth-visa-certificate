@@ -5,9 +5,36 @@ import { Button } from '../../components/ui/button';
 import { Link } from 'react-router-dom';
 import { ArrowRight, FileText, CheckCircle } from 'lucide-react';
 
+import SEO from '../../components/SEO';
+
 export default function NetWorthCertificate() {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://networthvisa.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Net Worth Certificate",
+        "item": "https://networthvisa.com/net-worth-certificate"
+      }
+    ]
+  };
+
   return (
     <div className="bg-[#F5F8FB] min-h-screen py-12">
+      <SEO 
+        title="Net Worth Certificate for Visa | Individual & Family Assets"
+        description="Learn about Individual and Family Net Worth Certificates for visa applications. Professional CA certification of property, bank balances, and investments."
+        canonical="/net-worth-certificate"
+        schema={breadcrumbSchema}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           className="max-w-3xl mx-auto mb-16 text-center"

@@ -1,5 +1,12 @@
 User-agent: *
-Disallow: /admin
-Disallow: /admin/*
 Allow: /
-Sitemap: https://networthcertificatevisa.com/sitemap.xml
+
+Disallow: /admin
+Disallow: /admin/
+Disallow: /login
+Disallow: /dashboard
+Disallow: /track-application
+Disallow: /api/
+Disallow: /private/
+
+Sitemap: https://networthvisa.com/sitemap.xml

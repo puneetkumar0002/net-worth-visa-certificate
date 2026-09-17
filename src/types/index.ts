@@ -82,3 +82,19 @@ export interface CAProfile {
   phone: string;
   email: string;
 }
+
+export interface CityLocation {
+  id: string;
+  city: string;
+  state: string;
+  slug: string;
+  status: 'active' | 'inactive';
+  h1: string;
+  intro: string;
+  localContent: string;
+  faqs: { question: string; answer: string }[];
+  metaTitle: string;
+  metaDescription: string;
+  createdAt: any;
+  updatedAt: any;
+}

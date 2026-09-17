@@ -7,16 +7,37 @@ import { Link } from 'react-router-dom';
 import { db } from '../../lib/firebase';
 import { collection, query, orderBy, where, getDocs } from 'firebase/firestore';
 
+import SEO from '../../components/SEO';
+
 export default function VisaCountries() {
   const [dynamicCountries, setDynamicCountries] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://networthvisa.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Visa Countries",
+        "item": "https://networthvisa.com/visa-countries"
+      }
+    ]
+  };
 
   const defaultCountries = [
     { name: 'Canada', types: ['Visitor Visa', 'Study Permit', 'Family Visa', 'Super Visa'], flag: '🇨🇦' },
-    { name: 'United Kingdom', types: ['Standard Visitor Visa', 'Student Visa', 'Family Route'], flag: '🇬🇧' },
+    { name: 'UK', types: ['Standard Visitor Visa', 'Student Visa', 'Family Route'], flag: '🇬🇧' },
     { name: 'Australia', types: ['Visitor Visa', 'Student Visa', 'Parent Visa', 'Partner Visa'], flag: '🇦🇺' },
-    { name: 'United States', types: ['B1/B2 Visitor', 'F1 Student', 'Family Sponsorship'], flag: '🇺🇸' },
-    { name: 'Schengen Area', types: ['Tourist Visa', 'Business Visa', 'Student Visa'], flag: '🇪🇺' },
+    { name: 'USA', types: ['B1/B2 Visitor', 'F1 Student', 'Family Sponsorship'], flag: '🇺🇸' },
+    { name: 'Schengen', types: ['Tourist Visa', 'Business Visa', 'Student Visa'], flag: '🇪🇺' },
     { name: 'New Zealand', types: ['Visitor Visa', 'Student Visa', 'Partnership Visa'], flag: '🇳🇿' },
   ];
 
@@ -53,6 +74,12 @@ export default function VisaCountries() {
   
   return (
     <div className="bg-[#F5F8FB] min-h-screen py-12">
+      <SEO 
+        title="Visa Destinations Financial Documentation | Global Coverage"
+        description="We provide Net Worth Certificates for Canada, UK, Australia, USA, New Zealand, and Schengen visas. Specialized documentation for student, visitor and family visas."
+        canonical="/visa-countries"
+        schema={breadcrumbSchema}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           className="text-center max-w-3xl mx-auto mb-16"
@@ -91,11 +118,18 @@ export default function VisaCountries() {
                       </div>
                     ))}
                   </div>
-                  <Link to="/contact" className="mt-auto">
-                    <Button variant="outline" className="w-full font-semibold border-slate-200 hover:border-[#0B1830]">
-                      Enquire Now
-                    </Button>
-                  </Link>
+                  <div className="flex flex-col gap-2 mt-auto">
+                    <Link to={`/${country.name.toLowerCase().replace(/\s+/g, '-')}-net-worth-certificate`}>
+                      <Button variant="outline" className="w-full font-semibold border-slate-200 hover:border-[#0C6D62] text-[#0C6D62]">
+                        View Details
+                      </Button>
+                    </Link>
+                    <Link to="/contact">
+                      <Button className="w-full bg-[#0B1830] hover:bg-[#0B1830]/90 font-semibold">
+                        Enquire Now
+                      </Button>
+                    </Link>
+                  </div>
                 </CardContent>
               </Card>
             </motion.div>

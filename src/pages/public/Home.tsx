@@ -13,9 +13,30 @@ import { doc, getDoc } from 'firebase/firestore';
 import { openWhatsApp } from '../../lib/whatsapp';
 import { handleCTAAction } from '../../lib/cta';
 
+import SEO from '../../components/SEO';
+
 export default function Home() {
   const navigate = useNavigate();
   const { settings, cta, loading } = useSiteSettings();
+  
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Networth Certificate Visa",
+    "url": "https://networthvisa.com",
+    "logo": settings.logoUrl || "https://networthvisa.com/logo.png",
+    "telephone": settings.phone,
+    "email": settings.email,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": settings.address,
+      "addressLocality": settings.city,
+      "addressRegion": settings.state,
+      "postalCode": settings.pincode,
+      "addressCountry": settings.country
+    }
+  };
+
   const [content, setContent] = useState({
     heroHeading: 'Net Worth Certificate for Your Visa Application',
     heroSubheading: 'CA-Certified Visa Financial Documentation',
@@ -58,6 +79,12 @@ export default function Home() {
 
   return (
     <div>
+      <SEO 
+        title="Net Worth Certificate for Visa | CA-Certified with UDIN"
+        description="Get a professionally prepared Net Worth Certificate for visa applications with CA review, clear asset-liability summary, document guidance, and online support."
+        canonical="/"
+        schema={organizationSchema}
+      />
       {/* Hero Section */}
       <section className="bg-white pt-12 md:pt-20 pb-16 md:pb-24 border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

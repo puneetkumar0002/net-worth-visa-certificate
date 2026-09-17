@@ -3,9 +3,36 @@ import { motion } from 'motion/react';
 import { Card, CardContent } from '../../components/ui/card';
 import { Award, Briefcase, FileSignature, CheckCircle } from 'lucide-react';
 
+import SEO from '../../components/SEO';
+
 export default function About() {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://networthvisa.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "About Us",
+        "item": "https://networthvisa.com/about"
+      }
+    ]
+  };
+
   return (
     <div className="bg-[#F5F8FB] min-h-screen py-12">
+      <SEO 
+        title="About Networth Certificate Visa | Chartered Accountants"
+        description="Learn about our professional Chartered Accountant firm specializing in Net Worth Certificates and financial documentation for global visa applications."
+        canonical="/about"
+        schema={breadcrumbSchema}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
           <motion.div

@@ -1,6 +1,6 @@
 {
   "name": "Networth Certificate Visa",
-  "description": "CA-Certified Net Worth Certificate for Visa applications.",
+  "description": "Get a professionally prepared Net Worth Certificate for visa applications with CA review, clear asset-liability summary, document guidance, and online support.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

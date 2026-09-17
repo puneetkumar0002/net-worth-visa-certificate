@@ -11,8 +11,30 @@ import toast from 'react-hot-toast';
 import { useSiteSettings } from '../../contexts/SiteSettingsContext';
 import { openWhatsApp } from '../../lib/whatsapp';
 
+import SEO from '../../components/SEO';
+
 export default function Contact() {
   const { settings, loading: settingsLoading } = useSiteSettings();
+  
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://networthvisa.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Contact Us",
+        "item": "https://networthvisa.com/contact"
+      }
+    ]
+  };
+
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -112,6 +134,12 @@ Please share the required document checklist and next steps.`;
 
   return (
     <div className="bg-[#F5F8FB] min-h-screen py-12">
+      <SEO 
+        title="Contact Networth Certificate Visa | Visa Financial Documentation"
+        description="Have questions about your Net Worth Certificate? Contact us for professional CA-certified financial documentation guidance for visa applications."
+        canonical="/contact"
+        schema={breadcrumbSchema}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           className="text-center max-w-2xl mx-auto mb-12"
